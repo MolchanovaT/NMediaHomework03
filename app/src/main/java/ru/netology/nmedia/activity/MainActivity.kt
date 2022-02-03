@@ -1,9 +1,11 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.data.Post
+import ru.netology.nmedia.viewmodel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,7 +13,35 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val post = Post(
+        val viewModel: PostViewModel by viewModels()
+        viewModel.data.observe(this) { post ->
+            with(binding) {
+                author.text = post.author
+                published.text = post.published
+                content.text = post.content
+                likes.setImageResource(
+                    if (post.likedByMe) R.drawable.ic_liked else R.drawable.ic_like
+                )
+
+                likesAmount.text = viewModel.amountRepresentation(post.likes)
+                repostsAmount.text = viewModel.amountRepresentation(post.reposts)
+                viewsAmount.text = viewModel.amountRepresentation(post.views)
+            }
+
+            binding.likes.setOnClickListener {
+                viewModel.like()
+            }
+
+            binding.reposts.setOnClickListener {
+                viewModel.repost()
+            }
+
+            binding.views.setOnClickListener {
+                viewModel.view()
+            }
+        }
+
+        /*val post = Post(
             id = 1,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
@@ -52,16 +82,6 @@ class MainActivity : AppCompatActivity() {
                 post.views++
                 viewsAmount.text = amountRepresentation(post.views)
             }
-        }
-    }
-
-    private fun amountRepresentation(num: Int): String {
-       return when {
-        num < 1_000 -> num.toString()
-           num in 1_000..9999 -> "%.1f".format(num.toDouble()/1_000) + "K"
-           num in 10_000..999999 -> (num/1_000).toString() + "K"
-           num >= 1_000_000 -> "%.1f".format(num.toDouble()/1_000_000) + "M"
-           else -> num.toString()
-       }
+        }*/
     }
 }
