@@ -10,5 +10,4 @@ class PostViewModel : ViewModel() {
     fun like() = repository.like()
     fun repost() = repository.repost()
     fun view() = repository.view()
-    fun amountRepresentation(num: Int) = repository.amountRepresentation(num)
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.data.Post
 
-class PostRepositoryInMemoryImpl: PostRepository {
+class PostRepositoryInMemoryImpl : PostRepository {
     private var post = Post(
         id = 1,
         author = "Нетология. Университет интернет-профессий будущего",
@@ -32,15 +32,5 @@ class PostRepositoryInMemoryImpl: PostRepository {
         post = post.copy()
         post.views++
         data.value = post
-    }
-
-    override fun amountRepresentation(num: Int): String {
-        return when {
-            num < 1_000 -> num.toString()
-            num in 1_000..9999 -> "%.1f".format(num.toDouble() / 1_000) + "K"
-            num in 10_000..999999 -> (num / 1_000).toString() + "K"
-            num >= 1_000_000 -> "%.1f".format(num.toDouble() / 1_000_000) + "M"
-            else -> num.toString()
-        }
     }
 }

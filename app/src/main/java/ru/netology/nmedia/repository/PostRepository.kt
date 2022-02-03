@@ -8,5 +8,4 @@ interface PostRepository {
     fun like()
     fun repost()
     fun view()
-    fun amountRepresentation(num: Int): String
 }
