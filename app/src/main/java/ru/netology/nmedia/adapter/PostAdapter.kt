@@ -9,10 +9,6 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.data.Post
 
-typealias OnLikeListener = (post: Post) -> Unit
-typealias OnRepostListener = (post: Post) -> Unit
-typealias OnViewListener = (post: Post) -> Unit
-
 interface OnInteractionListener {
     fun onLike(post: Post) {}
     fun onRepost(post: Post) {}
