@@ -43,25 +43,22 @@ class PostViewHolder(
             published.text = post.published
             content.text = post.content
 
-            likes.setImageResource(
-                if (post.likedByMe) R.drawable.ic_liked else R.drawable.ic_like
-            )
+            like.isChecked = post.likedByMe
+            like.text = amountRepresentation("${post.likes}".toInt())
 
-            likesAmount.text = amountRepresentation(post.likes)
-
-            likes.setOnClickListener {
+            like.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
 
-            repostsAmount.text = amountRepresentation(post.reposts)
+            repost.text = amountRepresentation("${post.reposts}".toInt())
 
-            reposts.setOnClickListener {
+            repost.setOnClickListener {
                 onInteractionListener.onRepost(post)
             }
 
-            viewsAmount.text = amountRepresentation(post.views)
+            view.text = amountRepresentation("${post.views}".toInt())
 
-            views.setOnClickListener {
+            view.setOnClickListener {
                 onInteractionListener.onView(post)
             }
 

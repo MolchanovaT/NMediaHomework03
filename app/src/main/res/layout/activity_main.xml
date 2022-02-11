@@ -38,9 +38,9 @@
         android:layout_marginTop="@dimen/common_spacing"
         android:background="@android:color/transparent"
         android:contentDescription="@string/edit_image"
+        app:layout_constraintBottom_toTopOf="@id/editTop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolsTop"
-        app:layout_constraintBottom_toTopOf="@id/editTop"
         app:srcCompat="@drawable/ic_baseline_edit_24" />
 
     <TextView
@@ -50,21 +50,21 @@
         android:layout_marginStart="@dimen/common_spacing"
         android:layout_marginTop="@dimen/common_spacing"
         android:text="@string/edit_text"
+        app:layout_constraintBottom_toTopOf="@id/editTop"
         app:layout_constraintStart_toEndOf="@id/editImage"
-        app:layout_constraintTop_toBottomOf="@id/toolsTop"
-        app:layout_constraintBottom_toTopOf="@id/editTop"/>
+        app:layout_constraintTop_toBottomOf="@id/toolsTop" />
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/cancelEdit"
+        style="@style/Widget.AppTheme.MainButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
-        android:background="@android:color/transparent"
         android:contentDescription="@string/cancel_edit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolsTop"
+        app:icon="@drawable/ic_baseline_clear_24"
         app:layout_constraintBottom_toTopOf="@id/editTop"
-        app:srcCompat="@drawable/ic_baseline_clear_24" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolsTop" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/editTop"
@@ -88,18 +88,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTop" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/save"
+        style="@style/Widget.AppTheme.MainButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
-        android:background="@android:color/transparent"
         android:contentDescription="@string/save_image"
+        app:icon="@drawable/ic_save_48"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/content"
-        app:layout_constraintTop_toBottomOf="@id/editTop"
-        app:srcCompat="@drawable/ic_save_48" />
+        app:layout_constraintTop_toBottomOf="@id/editTop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
