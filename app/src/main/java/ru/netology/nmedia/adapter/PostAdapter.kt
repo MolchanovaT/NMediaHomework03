@@ -44,19 +44,19 @@ class PostViewHolder(
             content.text = post.content
 
             like.isChecked = post.likedByMe
-            like.text = amountRepresentation("${post.likes}".toInt())
+            like.text = amountRepresentation(post.likes)
 
             like.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
 
-            repost.text = amountRepresentation("${post.reposts}".toInt())
+            repost.text = amountRepresentation(post.reposts)
 
             repost.setOnClickListener {
                 onInteractionListener.onRepost(post)
             }
 
-            view.text = amountRepresentation("${post.views}".toInt())
+            view.text = amountRepresentation(post.views)
 
             view.setOnClickListener {
                 onInteractionListener.onView(post)
