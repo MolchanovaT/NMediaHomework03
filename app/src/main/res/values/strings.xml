@@ -15,4 +15,6 @@
     <string name="save_image">Save Image</string>
     <string name="edit_text">Edit text</string>
     <string name="cancel_edit">Cancel edit</string>
+    <string name="add_post">Add post</string>
+    <string name="chooser_share_post">Share post</string>
 </resources>

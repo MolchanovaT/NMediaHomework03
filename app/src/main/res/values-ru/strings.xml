@@ -16,4 +16,6 @@
     <string name="save_image">Картинка сохранения</string>
     <string name="edit_text">Редактирование текста</string>
     <string name="cancel_edit">Отменить редактирование</string>
+    <string name="add_post">Добавить пост</string>
+    <string name="chooser_share_post">Поделиться</string>
 </resources>
