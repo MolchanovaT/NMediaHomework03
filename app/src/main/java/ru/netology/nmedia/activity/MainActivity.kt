@@ -8,7 +8,6 @@ import ru.netology.nmedia.adapter.*
 import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.viewmodel.PostViewModel
-import androidx.activity.result.launch
 import ru.netology.nmedia.R
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         val viewModel: PostViewModel by viewModels()
 
         val adapter = PostsAdapter(object : OnInteractionListener {
+
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
             }
@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.viewById(post.id)
             }
         })
+
         binding.list.adapter = adapter
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
@@ -61,10 +62,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.fab.setOnClickListener {
-            newPostLauncher.launch()
+            newPostLauncher.launch("")
+        }
+
+        val editPostLauncher =
+            registerForActivityResult(NewPostResultContract()) { result ->
+                result ?: return@registerForActivityResult
+                viewModel.changeContent(result)
+                viewModel.save()
+            }
+
+        viewModel.edited.observe(this) { post ->
+            if (post.id == 0L) {
+                return@observe
+            }
+            editPostLauncher.launch(post.content)
         }
     }
-
 }
 // super.onCreate(savedInstanceState)
 // val binding = ActivityMainBinding.inflate(layoutInflater)

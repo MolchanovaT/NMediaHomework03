@@ -28,6 +28,16 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/description_post_save"
         app:layout_anchor="@id/bottomAppBar"
+        app:layout_anchorGravity="start"
         app:srcCompat="@drawable/ic_ok_24dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/cancel_edit"
+        app:layout_anchor="@id/bottomAppBar"
+        app:layout_anchorGravity="end"
+        app:srcCompat="@drawable/ic_baseline_clear_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -11,6 +11,14 @@ class NewPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityNewPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        intent.getStringExtra(Intent.EXTRA_TEXT).let {
+            val text = it
+            if (!text.isNullOrBlank()) {
+                binding.edit.setText(text)
+            }
+        }
+
         binding.edit.requestFocus()
         binding.ok.setOnClickListener {
             val intent = Intent()
@@ -21,6 +29,13 @@ class NewPostActivity : AppCompatActivity() {
                 intent.putExtra(Intent.EXTRA_TEXT, content)
                 setResult(Activity.RESULT_OK, intent)
             }
+            finish()
+        }
+
+        binding.cancel.setOnClickListener {
+            val intent = Intent()
+            setResult(Activity.RESULT_CANCELED, intent)
+            binding.edit.setText("")
             finish()
         }
     }
