@@ -1,6 +1,7 @@
 package ru.netology.nmedia.activity
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -47,6 +48,12 @@ class MainActivity : AppCompatActivity() {
 
             override fun onView(post: Post) {
                 viewModel.viewById(post.id)
+            }
+
+            override fun onPlay(post: Post) {
+                val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video));
+                startActivity(webIntent)
+
             }
         })
 
