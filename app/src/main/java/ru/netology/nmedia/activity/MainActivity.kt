@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
                     type = "text/plain"
                 }
 
+                viewModel.repostById(post.id)
+
                 val shareIntent =
                     Intent.createChooser(intent, getString(R.string.chooser_share_post))
                 startActivity(shareIntent)
@@ -51,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onPlay(post: Post) {
-                val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video));
+                val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
                 startActivity(webIntent)
 
             }
@@ -72,18 +74,11 @@ class MainActivity : AppCompatActivity() {
             newPostLauncher.launch("")
         }
 
-        val editPostLauncher =
-            registerForActivityResult(NewPostResultContract()) { result ->
-                result ?: return@registerForActivityResult
-                viewModel.changeContent(result)
-                viewModel.save()
-            }
-
         viewModel.edited.observe(this) { post ->
             if (post.id == 0L) {
                 return@observe
             }
-            editPostLauncher.launch(post.content)
+            newPostLauncher.launch(post.content)
         }
     }
 }
