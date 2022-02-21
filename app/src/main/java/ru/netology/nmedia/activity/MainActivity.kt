@@ -41,11 +41,11 @@ class MainActivity : AppCompatActivity() {
                     type = "text/plain"
                 }
 
-                viewModel.repostById(post.id)
-
                 val shareIntent =
                     Intent.createChooser(intent, getString(R.string.chooser_share_post))
                 startActivity(shareIntent)
+
+                viewModel.repostById(post.id)
             }
 
             override fun onView(post: Post) {
