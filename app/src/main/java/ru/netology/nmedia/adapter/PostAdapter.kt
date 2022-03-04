@@ -20,6 +20,8 @@ interface OnInteractionListener {
     fun onRemove(post: Post) {}
 
     fun onPlay(post: Post) {}
+
+    fun onContent(post: Post) {}
 }
 
 class PostsAdapter(
@@ -95,6 +97,10 @@ class PostViewHolder(
 
             play.setOnClickListener {
                 onInteractionListener.onPlay(post)
+            }
+
+            content.setOnClickListener {
+                onInteractionListener.onContent(post)
             }
         }
     }

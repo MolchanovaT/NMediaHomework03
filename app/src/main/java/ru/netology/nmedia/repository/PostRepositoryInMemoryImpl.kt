@@ -155,4 +155,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
         posts = posts.filter { it.id != id }
         data.value = posts
     }
+
+    override fun editById(id: Long): Post {
+        val post = posts.filter { it.id == id }
+        return post[0]
+    }
 }

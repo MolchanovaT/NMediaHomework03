@@ -88,6 +88,11 @@ class PostRepositoryFileImpl(
         sync()
     }
 
+    override fun editById(id: Long): Post {
+        val post = posts.filter { it.id == id }
+        return post[0]
+    }
+
     private fun sync() {
         context.openFileOutput(filename, Context.MODE_PRIVATE).bufferedWriter().use {
             it.write(gson.toJson(posts))
