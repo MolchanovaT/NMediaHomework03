@@ -34,13 +34,13 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         edited.value = empty
     }
 
-//    fun edit(post: Post) {
-//        edited.value = post
-//    }
-
-    fun edit(id: Long) {
-        edited.value = repository.editById(id)
+    fun edit(post: Post) {
+        edited.value = post
     }
+
+    /*fun edit(id: Long) {
+        edited.value = repository.editById(id)
+    }*/
 
     fun changeContent(content: String) {
         val text = content.trim()

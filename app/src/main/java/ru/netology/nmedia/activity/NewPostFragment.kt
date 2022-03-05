@@ -10,14 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.util.AndroidUtils
 import ru.netology.nmedia.util.StringArg
-import ru.netology.nmedia.util.LongArg
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class NewPostFragment : Fragment() {
 
     companion object {
         var Bundle.textArg: String? by StringArg
-        var Bundle.idArg: Long? by LongArg
     }
 
     private val viewModel: PostViewModel by viewModels(
@@ -39,10 +37,6 @@ class NewPostFragment : Fragment() {
             ?.let(binding.edit::setText)
 
         binding.ok.setOnClickListener {
-            val id = arguments?.idArg
-            if (id != null) {
-                viewModel.edit(id)
-            }
             viewModel.changeContent(binding.edit.text.toString())
             viewModel.save()
             AndroidUtils.hideKeyboard(requireView())

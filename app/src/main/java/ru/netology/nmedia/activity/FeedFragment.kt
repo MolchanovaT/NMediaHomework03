@@ -11,19 +11,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
 import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
-import ru.netology.nmedia.activity.NewPostFragment.Companion.idArg
+import ru.netology.nmedia.activity.PostFragment.Companion.idArg
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.FragmentFeedBinding
 import ru.netology.nmedia.data.Post
-import ru.netology.nmedia.util.LongArg
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class FeedFragment : Fragment() {
-
-    companion object {
-        var Bundle.idArgDelete: Long? by LongArg
-    }
 
     private val viewModel: PostViewModel by viewModels(
         ownerProducer = ::requireParentFragment
@@ -40,21 +35,16 @@ class FeedFragment : Fragment() {
             false
         )
 
-        val idDelete = arguments?.idArgDelete
-        if (idDelete != null) viewModel.removeById(idDelete)
-
         val adapter = PostsAdapter(object : OnInteractionListener {
 
             override fun onEdit(post: Post) {
-//                viewModel.edit(post)
+                viewModel.edit(post)
                 val text = post.content
-                val id = post.id
                 if (text.isNotBlank()) {
                     findNavController().navigate(
                         R.id.action_feedFragment_to_newPostFragment,
                         Bundle().apply {
                             textArg = text
-                            idArg = id
                         }
                     )
                 }
