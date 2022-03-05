@@ -30,7 +30,7 @@ class PostRepositoryFileImpl(
         }
     }
 
-   override fun getAll(): LiveData<List<Post>> = data
+    override fun getAll(): LiveData<List<Post>> = data
 
     override fun save(post: Post) {
         if (post.id == 0L) {
@@ -86,11 +86,6 @@ class PostRepositoryFileImpl(
         posts = posts.filter { it.id != id }
         data.value = posts
         sync()
-    }
-
-    override fun editById(id: Long): Post {
-        val post = posts.filter { it.id == id }
-        return post[0]
     }
 
     private fun sync() {

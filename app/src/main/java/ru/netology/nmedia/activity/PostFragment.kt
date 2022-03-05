@@ -12,8 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
 import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
-import ru.netology.nmedia.adapter.OnInteractionListener
-import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.FragmentPostBinding
 import ru.netology.nmedia.util.LongArg
 import ru.netology.nmedia.viewmodel.PostViewModel
@@ -21,7 +19,7 @@ import ru.netology.nmedia.viewmodel.PostViewModel
 class PostFragment : Fragment() {
 
     companion object {
-        var Bundle.idArg: Long? by LongArg
+        var Bundle.idArg: Long by LongArg
     }
 
     private val viewModel: PostViewModel by viewModels(
@@ -39,15 +37,11 @@ class PostFragment : Fragment() {
             false
         )
 
-        val id = arguments?.idArg
-
-        val adapter = PostsAdapter(object : OnInteractionListener {})
+        val id = arguments?.idArg ?: -1
 
         viewModel.data.observe(viewLifecycleOwner)
         { posts ->
-            adapter.submitList(posts)
-            val filterPosts = posts.filter { it.id == id }
-            val post = filterPosts[0]
+            val post = posts.singleOrNull { it.id == id } ?: return@observe
 
             binding.postContent.apply {
                 author.text = post.author
@@ -64,7 +58,17 @@ class PostFragment : Fragment() {
 
                 like.setOnClickListener { viewModel.likeById(post.id) }
 
-                repost.setOnClickListener { viewModel.repostById(post.id) }
+                repost.setOnClickListener {
+                    val intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, post.content)
+                        type = "text/plain"
+                    }
+
+                    val shareIntent =
+                        Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                    startActivity(shareIntent)
+                    viewModel.repostById(post.id) }
 
                 view.setOnClickListener { viewModel.viewById(post.id) }
 
@@ -76,10 +80,7 @@ class PostFragment : Fragment() {
                             when (item.itemId) {
                                 R.id.remove -> {
                                     findNavController().navigateUp()
-                                    /*if (id != null) {
-                                        viewModel.removeById(post.id)
-                                    }*/
-
+                                    viewModel.removeById(post.id)
                                     true
                                 }
                                 R.id.edit -> {
