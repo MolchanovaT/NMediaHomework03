@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import ru.netology.nmedia.databinding.FragmentNewPostBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -49,32 +50,5 @@ class NewPostFragment : Fragment() {
             findNavController().navigateUp()
         }
         return binding.root
-
-        /*intent.getStringExtra(Intent.EXTRA_TEXT).let {
-            val text = it
-            if (!text.isNullOrBlank()) {
-                binding.edit.setText(text)
-            }
-        }*/
-
-        /*binding.edit.requestFocus()
-        binding.ok.setOnClickListener {
-            val intent = Intent()
-            if (binding.edit.text.isNullOrBlank()) {
-                setResult(Activity.RESULT_CANCELED, intent)
-            } else {
-                val content = binding.edit.text.toString()
-                intent.putExtra(Intent.EXTRA_TEXT, content)
-                setResult(Activity.RESULT_OK, intent)
-            }
-            finish()
-        }
-
-        binding.cancel.setOnClickListener {
-            val intent = Intent()
-            setResult(Activity.RESULT_CANCELED, intent)
-            binding.edit.setText("")
-            finish()
-        }*/
     }
 }
