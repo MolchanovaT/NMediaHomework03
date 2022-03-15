@@ -30,7 +30,7 @@ class PostRepositoryFileImpl(
         }
     }
 
-   override fun getAll(): LiveData<List<Post>> = data
+    override fun getAll(): LiveData<List<Post>> = data
 
     override fun save(post: Post) {
         if (post.id == 0L) {
