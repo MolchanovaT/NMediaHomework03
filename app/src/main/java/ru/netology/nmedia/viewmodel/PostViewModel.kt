@@ -10,9 +10,9 @@ import ru.netology.nmedia.repository.PostRepositoryImpl
 
 private val empty = Post(
     id = 0,
-    author = "",
+    author = "Me",
     content = "",
-    published = "",
+    published = "now",
     likedByMe = false,
     likes = 0,
     reposts = 0,
