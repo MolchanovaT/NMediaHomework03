@@ -89,7 +89,7 @@ class FCMService : FirebaseMessagingService() {
 enum class Action {
     LIKE,
     NEWPOST,
-    ERROR
+    ERROR1
 }
 
 data class Like(
