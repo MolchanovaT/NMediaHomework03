@@ -35,7 +35,13 @@ class FCMService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
 
         message.data[action]?.let {
-            when (Action.valueOf(it)) {
+            val actionRes: Action = try {
+                Action.valueOf(it)
+            } catch (e: Exception) {
+                throw Exception("Unknown notification")
+            }
+
+            when (actionRes) {
                 Action.LIKE -> handleLike(gson.fromJson(message.data[content], Like::class.java))
                 Action.NEWPOST -> handleNewPost(
                     gson.fromJson(
@@ -43,7 +49,6 @@ class FCMService : FirebaseMessagingService() {
                         NewPost::class.java
                     )
                 )
-                else -> throw Exception("Unknown notification")
             }
         }
     }
@@ -88,8 +93,7 @@ class FCMService : FirebaseMessagingService() {
 
 enum class Action {
     LIKE,
-    NEWPOST,
-    ERROR
+    NEWPOST
 }
 
 data class Like(
