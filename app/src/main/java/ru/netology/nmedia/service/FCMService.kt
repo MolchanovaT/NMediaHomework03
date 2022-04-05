@@ -38,7 +38,7 @@ class FCMService : FirebaseMessagingService() {
             val actionRes: Action = try {
                 Action.valueOf(it)
             } catch (e: Exception) {
-                throw Exception("Unknown notification")
+                Action.ERROR
             }
 
             when (actionRes) {
@@ -48,7 +48,7 @@ class FCMService : FirebaseMessagingService() {
                         message.data[content],
                         NewPost::class.java
                     )
-                )
+                ) else -> println("Unknown notification")
             }
         }
     }
@@ -93,7 +93,8 @@ class FCMService : FirebaseMessagingService() {
 
 enum class Action {
     LIKE,
-    NEWPOST
+    NEWPOST,
+    ERROR
 }
 
 data class Like(
